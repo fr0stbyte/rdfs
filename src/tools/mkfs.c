@@ -47,7 +47,6 @@ void verify_device_space(int fd) {
     perror("[verify_device_space]");
     exit(1);
   }
-  lseek(fd, 0, SEEK_SET);
 }
 
 void write_superblock(int fd) {
@@ -59,6 +58,8 @@ void write_superblock(int fd) {
   sb.s_nifree = RD_MAXFILES;
   sb.s_nbfree = RD_MAXBLOCKS;
 
+  fprintf(stdout, "inodes free : %d\n", sb.s_nifree);
+  fprintf(stdout, "block free : %d\n", sb.s_nbfree);
   // reserve the first 4 inodes
   for(i = 0; i < 4; i++) {
     sb.s_inodes[i] = RD_INODE_INUSE;
@@ -69,7 +70,8 @@ void write_superblock(int fd) {
     sb.s_inodes[i] = RD_INODE_FREE;
   }
 
-  if(write(fd, (void*)&sb, sizeof(sb)) < 0) {
+  // write at offset 0
+  if(pwrite(fd, (void*)&sb, sizeof(sb), 0) < 0) {
     fprintf(stderr, "failed to write superblock\n");
     perror("[write_superblock]");
     exit(1);

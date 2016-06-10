@@ -4,7 +4,6 @@
 #include "../module/include/rdfs.h"
 
 int open_device(char *dev);
-struct rdfs_superblock* read_superblock(int fd);
-void print_superblock(struct rdfs_superblock *sb);
+int loop(int fd);
 
 #endif
