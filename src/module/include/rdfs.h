@@ -16,8 +16,9 @@ enum device_modes { RD_FSCLEAN, RD_FSDIRTY };
 enum inode_modes { RD_INODE_FREE, RD_INODE_INUSE };
 enum block_modes { RD_BLOCK_FREE, RD_BLOCK_INUSE };
 
+// 512 bytes
 struct rdfs_superblock {
-  __u8 s_mod;
+  __u8 s_mode;
   __u32 s_magic;
   __u16 s_nbfree;
   __u16 s_nifree;
@@ -25,16 +26,18 @@ struct rdfs_superblock {
   __u8 s_blocks[RD_MAXBLOCKS];
 };
 
+// 102 bytes
 struct rdfs_inode {
-  __u32 i_mode;
+  __u16 i_mode;
+  __u8 i_nlink;
   __u32 i_atime;
   __u32 i_ctime;
   __u32 i_mtime;
-  __u32 i_uid;
-  __u32 i_gid;
+  __u8 i_uid;
+  __u8 i_gid;
   __u32 i_size;
   __u32 i_blocks;
-  __u32 i_direct_blocks[RD_DIRECT_BLOCKS];
+  __u32 i_data[RD_DIRECT_BLOCKS];
 };
 
 #endif
