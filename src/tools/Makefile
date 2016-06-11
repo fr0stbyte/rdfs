@@ -1,16 +1,9 @@
-SRCS = mkfs.c
-
-OBJS = $(SRCS:.c=.o)
-
-TARGETS = $(OBJS:.o=)
-
-$(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) -c $<
-
-$(TARGETS): $(OBJS)
-	$(CC) -o $@ $<
-
+TARGETS = readfs mkfs
 all: $(TARGETS)
+
+readfs: readfs.c
+
+mkfs: mkfs.c
 
 clean:
 	rm -f *.o $(TARGETS) a.out
