@@ -6,8 +6,15 @@
 #define RD_MAXFILES 32 // inodes : 0,1 reserved, 2 root, 3 lost+found - regular files
 #define RD_MAXBLOCKS 468 // to keep superblock size under 512 bytes
 // #define RD_PARTITION_MAXSIZE ((RD_MAXFILES * RD_DIRECT_BLOCKS + 1 ) * RD_BSIZE) // total blocks + superblock
+#define RD_NAMELEN 32 //maximum name length
+#define RD_FIRST_DATA_BLOCK 33
+#define RD_SUPERBLOCK_POS 0
+#define RD_ROOT_INODE_NUMBER 1
 
+#ifndef __KERNEL__
 #define __KERNEL__
+#endif
+
 #include<asm/types.h>
 
 #define RD_MAGIC 0x00c0ffee
@@ -16,6 +23,7 @@ enum device_modes { RD_FSCLEAN, RD_FSDIRTY };
 enum inode_modes { RD_INODE_FREE, RD_INODE_INUSE };
 enum block_modes { RD_BLOCK_FREE, RD_BLOCK_INUSE };
 
+// ondisk superblock data structure
 // 512 bytes
 struct rdfs_superblock {
   __u8 s_mode;
@@ -26,6 +34,7 @@ struct rdfs_superblock {
   __u8 s_blocks[RD_MAXBLOCKS];
 };
 
+// on disk inode data structure
 // 102 bytes
 struct rdfs_inode {
   __u16 i_mode;
@@ -38,6 +47,13 @@ struct rdfs_inode {
   __u32 i_size;
   __u32 i_blocks;
   __u32 i_data[RD_DIRECT_BLOCKS];
+};
+
+// on disk directory structure
+
+struct rdfs_dirent {
+  __u32 d_inode;
+  char d_name[RD_NAMELEN];
 };
 
 #endif

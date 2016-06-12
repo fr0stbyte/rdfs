@@ -31,3 +31,11 @@
 # Debug files
 *.dSYM/
 *.su
+
+# test files
+test
+
+#TAGS
+GPATH
+GRTAGS
+GTAGS

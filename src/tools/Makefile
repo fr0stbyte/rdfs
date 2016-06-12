@@ -1,13 +1,12 @@
 TARGETS = readfs mkfs
-CFLAGS += -Wall -g -I.
-LDFLAGS += -L. -lrdfs 
+CFLAGS += -Wall -g -I. -I./include -I../rdfs
+LDFLAGS += -L./lib -lrdfs
 all: $(TARGETS)
 
-lib:
-	$(CC) $(CFLAGS) -c lib.c
-	$(AR) -cvq librdfs.a lib.o
+lib: force_look
+	cd lib; $(MAKE) $(MFLAGS) all
 
-readfs: lib 
+readfs: lib
 	$(CC) $(CFLAGS) -o readfs readfs.c $(LDFLAGS)
 
 mkfs: lib
@@ -15,3 +14,7 @@ mkfs: lib
 
 clean:
 	rm -f *.o $(TARGETS) a.out librdfs.a
+	cd lib; $(MAKE) clean
+
+force_look:
+	true
