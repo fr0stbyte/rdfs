@@ -7,16 +7,7 @@
 #include<linux/dcache.h>
 
 #include "rdfs.h"
-
-static int rdfs_statfs(struct dentry *dir, struct kstatfs *buf) {
-  printk(KERN_INFO
-         "rdfs_statfs called\n");
-  return 0;
-}
-
-static const struct super_operations rdfs_super_ops = {
-  .statfs = rdfs_statfs,
-};
+#include "internal.h"
 
 static const struct inode_operations rdfs_file_inode_operations = {};
 

@@ -1,6 +1,8 @@
-obj-m := rdfs.o
+obj-m := rd.o
 
-CFLAGS_rdfs.o := -DDEBUG
+CFLAGS_rd.o := -DDEBUG
+
+rd-objs := super.o rdfs.o
 
 all:
 	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
