@@ -53,6 +53,9 @@ static int rdfs_fill_super(struct super_block *sb, void *data, int silent){
   sb->s_magic = rdsb->s_magic;
   sb->s_maxbytes = RD_BSIZE;
   sb->s_op = &rdfs_super_ops; // need to define structure with superblock operations
+  sb->s_fs_info = (void*)rdsb;
+
+  // might need to set a in-memory representation of our superblock so that we can access other information
 
   root_inode = rdfs_get_inode(sb, NULL, S_IFDIR);
 
