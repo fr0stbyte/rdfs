@@ -1,9 +1,11 @@
 #ifndef _RDFS_READFS_H_
 #define _RDFS_READFS_H_
 
-#include "../module/include/rdfs.h"
+#include "device.h"
+#include "superblock.h"
+#include "direntry.h"
+#include "inode.h"
 
-int open_device(char *dev);
 int loop(int fd);
 
 #endif

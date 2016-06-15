@@ -1,5 +1,9 @@
-#include "lib.h"
-#include "../module/include/rdfs.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<fcntl.h>
+
+#include "readfs.h"
 
 int loop(int fd);
 
@@ -31,6 +35,9 @@ void process_inode(int fd, int n) {
   print_inode(inode);
 }
 
+void process_directory(int fd, int block) {
+  read_directory(fd, block);
+}
 void unimplemented(char c) {
   fprintf(stdout, "command '%c' not implemented yet\n", c);
 }
@@ -52,6 +59,10 @@ int loop(int fd) {
     case 'i':
       scanf("%d", &j);
       process_inode(fd, j);
+      break;
+    case 'd':
+      scanf("%d", &j);
+      process_directory(fd, j);
       break;
     default:
       fprintf(stdout, "default");
