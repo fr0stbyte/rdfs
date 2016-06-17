@@ -19,7 +19,7 @@ static struct inode* rdfs_get_inode(struct super_block *sb, const struct inode *
     inode->i_atime = inode->i_mtime = inode->i_ctime = CURRENT_TIME;
     switch(mode & S_IFMT) {
     case S_IFDIR:
-      inode->i_op = &rdfs_file_inode_operations;
+      inode->i_op = &rdfs_inode_operations;
       inode->i_fop = &simple_dir_operations;
       break;
     }

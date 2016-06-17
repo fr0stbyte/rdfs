@@ -1,3 +1,4 @@
+#include<linux/fs.h>
 #include "rdfs.h"
 
 static int rdfs_file_open(struct inode *inode, struct file *file) {

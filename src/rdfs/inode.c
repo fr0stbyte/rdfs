@@ -1,4 +1,5 @@
+#include<linux/fs.h>
 #include "rdfs.h"
 
-const struct file_operations rdfs_inode_operations = {
+const struct inode_operations rdfs_inode_operations = {
 };

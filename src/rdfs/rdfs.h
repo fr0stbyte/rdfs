@@ -56,7 +56,7 @@ struct rdfs_dirent {
   char d_name[RD_NAMELEN];
 };
 
-extern struct inode_operations rdfs_inode_operations;
-extern struct file_operations rdfs_file_operations;
+extern const struct inode_operations rdfs_inode_operations;
+extern const struct file_operations rdfs_file_operations;
 
 #endif
