@@ -2,7 +2,7 @@ obj-m := rdfs.o
 
 CFLAGS_rdfs.o := -DDEBUG
 
-rdfs-objs := super.o main.o
+rdfs-objs := super.o inode.o file.o main.o
 
 all:
 	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

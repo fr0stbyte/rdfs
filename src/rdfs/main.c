@@ -9,8 +9,6 @@
 #include "rdfs.h"
 #include "internal.h"
 
-static const struct inode_operations rdfs_file_inode_operations = {};
-
 static struct inode* rdfs_get_inode(struct super_block *sb, const struct inode *dir,
                                     umode_t mode) {
   struct inode* inode;
