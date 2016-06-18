@@ -6,10 +6,12 @@
 
 //allocate an inode, result in dir/dentry
 static int rdfs_inode_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev) {
+  int error;
+  struct inode *inode;
   printk(KERN_INFO
          "rdfs_inode_mknod called");
-  int error = -ENOSPC;
-  struct inode *inode = rdfs_get_inode(dir->i_sb, dir, mode, dev);
+  error = -ENOSPC;
+  inode = rdfs_get_inode(dir->i_sb, dir, mode);
   if(inode) {
     d_instantiate(dentry, inode);
     dget(dentry);
@@ -19,10 +21,10 @@ static int rdfs_inode_mknod(struct inode *dir, struct dentry *dentry, umode_t mo
   return error;
 }
 
-static int rdfs_inode_create(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev) {
+static int rdfs_inode_create(struct inode *dir, struct dentry *dentry, umode_t mode, bool excl) {
   printk(KERN_INFO
          "rdfs_inode_create called");
-  return rdfs_inode_mknod(dir, dentry, mode, dev);
+  return rdfs_inode_mknod(dir, dentry, mode, 0);
 }
 
 const struct inode_operations rdfs_inode_operations = {
