@@ -1,5 +1,6 @@
 #include<linux/fs.h>
 #include<linux/statfs.h>
+#include<linux/slab.h>
 
 #include "rdfs.h"
 #include "internal.h"
@@ -29,9 +30,9 @@ static int rdfs_statfs(struct dentry *dir, struct kstatfs *buf) {
 static struct kmem_cache *rdfs_inode_cachep;
 
 static struct inode * rdfs_super_alloc_inode(struct super_block *sb) {
+  struct rdfs_inode_info *rdi;
   printk(KERN_INFO
          "rdfs_super_alloc_inode called");
-  struct rdfs_inode_info *rdi;
   rdi = kmem_cache_alloc(rdfs_inode_cachep, GFP_KERNEL);
   if(!rdi)
     return NULL;
