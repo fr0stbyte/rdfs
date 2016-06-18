@@ -26,6 +26,99 @@ static int rdfs_statfs(struct dentry *dir, struct kstatfs *buf) {
   return 0;
 }
 
+static struct inode * rdfs_super_alloc_inode(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_alloc_inode called");
+  return 0;
+}
+
+static void rdfs_super_destroy_inode(struct inode *i) {
+  printk(KERN_INFO
+         "rdfs_super_destroy_inode called");
+}
+
+static void rdfs_super_dirty_inode(struct inode *i, int flags) {
+  printk(KERN_INFO
+         "rdfs_super_dirty_inode called");
+}
+
+static int rdfs_super_write_inode(struct inode *i, struct writeback_control *wbc) {
+  printk(KERN_INFO
+         "rdfs_super_write_inode called");
+  return 0;
+}
+
+static int rdfs_super_drop_inode(struct inode* i) {
+  printk(KERN_INFO
+         "rdfs_super_drop_inode called");
+  return 0;
+}
+
+static void rdfs_super_evict_inode(struct inode* i) {
+  printk(KERN_INFO
+         "rdfs_super_evict_inode called");
+}
+
+static void rdfs_put_super(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_put_super called");
+}
+
+static int rdfs_super_sync_fs(struct super_block *sb, int wait) {
+  printk(KERN_INFO
+         "rdfs_super_sync_fs called");
+  return 0;
+}
+
+static int rdfs_super_freeze_super(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_freeze_super called");
+  return 0;
+}
+
+static int rdfs_super_freeze_fs(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_freeze_fs called");
+  return 0;
+}
+
+static int rdfs_super_thaw_super(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_thaw_super");
+  return 0;
+}
+
+static int rdfs_super_unfreeze_fs(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_unfreeze_fs called");
+  return 0;
+}
+
+static int rdfs_super_remount_fs(struct super_block *sb, int * a, char *c) {
+  printk(KERN_INFO
+         "rdfs_super_remount_fs called");
+  return 0;
+}
+
+static void rdfs_super_umount_begin(struct super_block *sb) {
+  printk(KERN_INFO
+         "rdfs_super_umount_begin called");
+}
+
 const struct super_operations rdfs_super_ops = {
   .statfs = rdfs_statfs,
+  .alloc_inode = rdfs_super_alloc_inode,
+  .destroy_inode = rdfs_super_destroy_inode,
+  .dirty_inode = rdfs_super_dirty_inode,
+  .write_inode = rdfs_super_write_inode,
+  .drop_inode = rdfs_super_drop_inode,
+  .evict_inode = rdfs_super_evict_inode,
+  .put_super = rdfs_super_put_super,
+  .sync_fs = rdfs_super_sync_fs,
+  .freeze_super = rdfs_super_freeze_super,
+  .freeze_fs = rdfs_super_freeze_fs,
+  .thaw_super = rdfs_super_that_super,
+  .unfreeze_fs = rdfs_super_unfreeze_fs,
+  .remount_fs = rdfs_super_remount_fs,
+  .umount_begin = rdfs_super_umount_begin,
 };
