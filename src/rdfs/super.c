@@ -70,21 +70,9 @@ static int rdfs_super_sync_fs(struct super_block *sb, int wait) {
   return 0;
 }
 
-static int rdfs_super_freeze_super(struct super_block *sb) {
-  printk(KERN_INFO
-         "rdfs_super_freeze_super called");
-  return 0;
-}
-
 static int rdfs_super_freeze_fs(struct super_block *sb) {
   printk(KERN_INFO
          "rdfs_super_freeze_fs called");
-  return 0;
-}
-
-static int rdfs_super_thaw_super(struct super_block *sb) {
-  printk(KERN_INFO
-         "rdfs_super_thaw_super");
   return 0;
 }
 
@@ -115,9 +103,7 @@ const struct super_operations rdfs_super_ops = {
   .evict_inode = rdfs_super_evict_inode,
   .put_super = rdfs_super_put_super,
   .sync_fs = rdfs_super_sync_fs,
-  .freeze_super = rdfs_super_freeze_super,
   .freeze_fs = rdfs_super_freeze_fs,
-  .thaw_super = rdfs_super_that_super,
   .unfreeze_fs = rdfs_super_unfreeze_fs,
   .remount_fs = rdfs_super_remount_fs,
   .umount_begin = rdfs_super_umount_begin,
