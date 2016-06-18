@@ -34,8 +34,7 @@ static struct inode * rdfs_super_alloc_inode(struct super_block *sb) {
   printk(KERN_INFO
          "rdfs_super_alloc_inode called");
   rdi = kmem_cache_alloc(rdfs_inode_cachep, GFP_KERNEL);
-  if(!rdi)
-    return NULL;
+  BUG_ON(!rdi);
 
   rdi->vfs_inode.i_version = 1;
   return &rdi->vfs_inode;
