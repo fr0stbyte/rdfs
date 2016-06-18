@@ -2,6 +2,7 @@
 #include<linux/dcache.h>
 
 #include "rdfs.h"
+#include "internal.h"
 
 //allocate an inode, result in dir/dentry
 static int rdfs_inode_mknod(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev) {
@@ -21,7 +22,7 @@ static int rdfs_inode_mknod(struct inode *dir, struct dentry *dentry, umode_t mo
 static int rdfs_inode_create(struct inode *dir, struct dentry *dentry, umode_t mode, dev_t dev) {
   printk(KERN_INFO
          "rdfs_inode_create called");
-  return rdfs_inode_mknod(dir, dentry, mode, dev)
+  return rdfs_inode_mknod(dir, dentry, mode, dev);
 }
 
 const struct inode_operations rdfs_inode_operations = {

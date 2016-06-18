@@ -9,7 +9,7 @@
 #include "rdfs.h"
 #include "internal.h"
 
-static struct inode* rdfs_get_inode(struct super_block *sb, const struct inode *dir,
+struct inode* rdfs_get_inode(struct super_block *sb, const struct inode *dir,
                                     umode_t mode) {
   struct inode* inode;
   inode = new_inode(sb);
