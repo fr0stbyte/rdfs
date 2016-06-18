@@ -55,6 +55,7 @@ static int rdfs_fill_super(struct super_block *sb, void *data, int silent){
 
   // might need to set a in-memory representation of our superblock so that we can access other information
 
+  // should take the mode from options extracted from the data pointer
   root_inode = rdfs_get_inode(sb, NULL, S_IFDIR | 0755);
 
   // set root node
