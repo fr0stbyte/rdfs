@@ -26,10 +26,18 @@ static int rdfs_statfs(struct dentry *dir, struct kstatfs *buf) {
   return 0;
 }
 
+static struct kmem_cache *rdfs_inode_cachep;
+
 static struct inode * rdfs_super_alloc_inode(struct super_block *sb) {
   printk(KERN_INFO
          "rdfs_super_alloc_inode called");
-  return 0;
+  struct rdfs_inode_info *rdi;
+  rdi = kmem_cache_alloc(rdfs_inode_cachep, GFP_KERNEL);
+  if(!rdi)
+    return NULL;
+
+  rdi->vfs_inode.i_version = 1;
+  return &rdi->vfs_inode;
 }
 
 static void rdfs_super_destroy_inode(struct inode *i) {

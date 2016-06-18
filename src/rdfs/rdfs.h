@@ -56,6 +56,14 @@ struct rdfs_dirent {
   char d_name[RD_NAMELEN];
 };
 
+
+// in memory inode structure
+
+struct rdfs_inode_info {
+  // position on disk of inode
+  __u32 inode_location;
+  struct inode vfs_inode;
+};
 extern const struct inode_operations rdfs_inode_operations;
 extern const struct file_operations rdfs_file_operations;
 
